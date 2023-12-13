@@ -4,6 +4,6 @@ import { LotenetController } from './lotenet.controller';
 
 @Module({
   controllers: [LotenetController],
-  providers: [LotenetService]
+  providers: [LotenetService],
 })
 export class LotenetModule {}
