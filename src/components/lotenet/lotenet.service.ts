@@ -1,9 +1,4 @@
-import {
-  BadGatewayException,
-  BadRequestException,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as https from 'https';
 
 import { BoletoInfo, QueryBoletoDto } from './dto/create-lotenet.dto';
@@ -52,37 +47,29 @@ export class LotenetService {
       };
     }
     const monto = this.sumarMontoGanador(data.jugadas);
-    return {
-      monto_ganador: monto,
-      serial: data.serialkey,
-      status:
-        monto === 0
-          ? MESSAGE.BOLETO_NO_GANADOR
-          : !data.pago
-          ? MESSAGE.BOLETO_GANADOR
+    if (monto === 0) {
+      return {
+        serial: data.serialkey,
+        status: MESSAGE.BOLETO_NO_GANADOR,
+        monto_ganador: monto,
+      };
+    }
+
+    if (data.pago) {
+      return {
+        serial: data.serialkey,
+        status: data.pago.canjeado_por
+          ? MESSAGE.BOLETO_CANJEADO
           : MESSAGE.BOLETO_PAGADO,
+        monto_ganador: monto,
+      };
+    }
+
+    return {
+      serial: data.serialkey,
+      status: MESSAGE.BOLETO_GANADOR,
+      monto_ganador: monto,
     };
-    //if (monto === 0) {
-    //  return {
-    //    monto_ganador: monto,
-    //    serial: data.serialkey,
-    //    status: MESSAGE.BOLETO_NO_GANADOR,
-    //  };
-    //}
-    //
-    //if (!data.pago) {
-    //  return {
-    //    monto_ganador: monto,
-    //    status: MESSAGE.BOLETO_GANADOR,
-    //    serial: data.serialkey,
-    //  };
-    //}
-    //
-    //return {
-    //  monto_ganador: monto,
-    //  status: MESSAGE.BOLETO_PAGADO,
-    //  serial: data.serialkey,
-    //};
   }
 
   private sumarMontoGanador(data: any): number {
