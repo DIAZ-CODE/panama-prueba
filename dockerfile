@@ -26,6 +26,7 @@ FROM node:21
 # Configurar las variables de entorno
 ENV TZ=America/Puerto_Rico
 ENV PORT=3000
+ENV URL_PLATFORM=
 
 
 # Copia solo los archivos necesarios desde la etapa de construcción

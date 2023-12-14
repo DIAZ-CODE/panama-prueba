@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  prueba-ticket:
+    image: carlosdiazz08/prueba-ticket:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"

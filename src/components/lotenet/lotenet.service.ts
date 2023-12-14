@@ -26,12 +26,13 @@ export class LotenetService {
       });
       const response = await axios.get(url, {
         httpsAgent: agent,
+        timeout: 10000,
       });
       const data = response.data;
       const consultarStatus = this.validarData(data);
       return consultarStatus;
     } catch (e) {
-      if ((e.response.status = 422)) {
+      if (e.response && e.response.status === 422) {
         throw new BadRequestException(MESSAGE.BOLETO_NO_EXISTE);
       }
       throw new BadRequestException(MESSAGE.NO_SE_PUDO_ACCEDER_A_LA_URL);
