@@ -1,10 +1,12 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as https from 'https';
-
-import { BoletoInfo, QueryBoletoDto } from './dto/create-lotenet.dto';
-import { MESSAGE } from 'src/config/message';
+import { addDays, format } from 'date-fns';
 import axios from 'axios';
 import { ConfigType } from '@nestjs/config';
+
+//Propio
+import { BoletoInfo, QueryBoletoDto } from './dto/create-lotenet.dto';
+import { MESSAGE } from 'src/config/message';
 import { config } from 'src/config/config';
 
 @Injectable()
@@ -42,9 +44,9 @@ export class LotenetService {
   private validarData(data: any): BoletoInfo {
     if (data.sorteo.premios == null) {
       return {
-        monto_ganador: 0,
-        status: MESSAGE.BOLETO_ACTIVO,
         serial: data.serialkey,
+        status: MESSAGE.BOLETO_ACTIVO,
+        monto_ganador: 0,
       };
     }
     const monto = this.sumarMontoGanador(data.jugadas);
@@ -66,9 +68,14 @@ export class LotenetService {
       };
     }
 
+    const fecha_sorteo = data.created_at.substring(0, 10);
+    const dia_caduca = data.caduca;
+    const validar_vencimiento = this.saberCaducado(fecha_sorteo, dia_caduca);
     return {
       serial: data.serialkey,
-      status: MESSAGE.BOLETO_GANADOR,
+      status: validar_vencimiento
+        ? MESSAGE.BOLETO_CADUCADO
+        : MESSAGE.BOLETO_GANADOR,
       monto_ganador: monto,
     };
   }
@@ -81,5 +88,16 @@ export class LotenetService {
       }
     }
     return total;
+  }
+
+  private saberCaducado(fecha_sorteo: string, dias: number): boolean {
+    const fecha_vencimiento = this.sumarDiasAFecha(fecha_sorteo, dias);
+    const fechaHoy = new Date();
+    return fechaHoy > fecha_vencimiento;
+  }
+
+  private sumarDiasAFecha(fecha: string, diasASumar: number): Date {
+    const fechaObj = new Date(fecha);
+    return addDays(fechaObj, diasASumar);
   }
 }

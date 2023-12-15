@@ -6,4 +6,5 @@ export enum MESSAGE {
   BOLETO_PAGADO = 'Boleto Pagado',
   BOLETO_ACTIVO = 'Boleto Activo',
   BOLETO_CANJEADO = 'Boleto Canjeado',
+  BOLETO_CADUCADO = 'Boleto Caducado',
 }
