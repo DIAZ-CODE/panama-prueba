@@ -11,5 +11,5 @@ export class BoletoInfo {
 
   readonly monto_ganador: number;
 
-  readonly serial: number;
+  //readonly serial: number;
 }

@@ -44,7 +44,6 @@ export class LotenetService {
   private validarData(data: any): BoletoInfo {
     if (data.sorteo.premios == null) {
       return {
-        serial: data.serialkey,
         status: MESSAGE.BOLETO_ACTIVO,
         monto_ganador: 0,
       };
@@ -52,7 +51,6 @@ export class LotenetService {
     const monto = this.sumarMontoGanador(data.jugadas);
     if (monto === 0) {
       return {
-        serial: data.serialkey,
         status: MESSAGE.BOLETO_NO_GANADOR,
         monto_ganador: monto,
       };
@@ -60,7 +58,6 @@ export class LotenetService {
 
     if (data.pago) {
       return {
-        serial: data.serialkey,
         status: data.pago.canjeado_por
           ? MESSAGE.BOLETO_CANJEADO
           : MESSAGE.BOLETO_PAGADO,
@@ -72,7 +69,6 @@ export class LotenetService {
     const dia_caduca = data.caduca;
     const validar_vencimiento = this.saberCaducado(fecha_sorteo, dia_caduca);
     return {
-      serial: data.serialkey,
       status: validar_vencimiento
         ? MESSAGE.BOLETO_CADUCADO
         : MESSAGE.BOLETO_GANADOR,
