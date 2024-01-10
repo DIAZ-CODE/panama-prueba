@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ConfigType } from '@nestjs/config';
 
 //Propio
-import { BoletoInfo, QueryBoletoDto } from './dto/create-lotenet.dto';
+import { QueryBoletoDto, Respuesta } from './dto/create-lotenet.dto';
 import { MESSAGE } from 'src/config/message';
 import { config } from 'src/config/config';
 
@@ -15,12 +15,12 @@ export class LotenetService {
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
   ) {}
 
-  async consultarBoleto(data: QueryBoletoDto): Promise<BoletoInfo> {
+  async consultarBoleto(data: QueryBoletoDto): Promise<Respuesta> {
     const boleto = await this.peticionLotenet(data.id_boleto);
     return boleto;
   }
 
-  private async peticionLotenet(id_boleto: string): Promise<BoletoInfo> {
+  private async peticionLotenet(id_boleto: string): Promise<Respuesta> {
     try {
       const url = `${this.configService.URL_PLATFORM}/api/boletos/${id_boleto}`;
       const agent = new https.Agent({
@@ -35,44 +35,97 @@ export class LotenetService {
       return consultarStatus;
     } catch (e) {
       if (e.response && e.response.status === 422) {
-        throw new BadRequestException(MESSAGE.BOLETO_NO_EXISTE);
+        return {
+          code: 106,
+          error: false,
+          status: {
+            message: MESSAGE.BOLETO_NO_EXISTE,
+            monto_ganador: 0,
+          },
+        };
       }
-      throw new BadRequestException(MESSAGE.NO_SE_PUDO_ACCEDER_A_LA_URL);
+      return {
+        code: 108,
+        error: true,
+        status: {
+          message: MESSAGE.NO_SE_PUDO_ACCEDER_A_LA_URL,
+          monto_ganador: 0,
+        },
+      };
     }
   }
 
-  private validarData(data: any): BoletoInfo {
-    if (data.sorteo.premios == null) {
+  private validarData(data: any): Respuesta {
+    //!NO HAY PREMIO EN EL SORTEO
+    if (data.sorteo.premios == null)
       return {
-        status: MESSAGE.BOLETO_ACTIVO,
-        monto_ganador: 0,
+        code: 102,
+        error: false,
+        status: {
+          message: MESSAGE.BOLETO_ACTIVO,
+          monto_ganador: 0,
+        },
       };
-    }
-    const monto = this.sumarMontoGanador(data.jugadas);
-    if (monto === 0) {
-      return {
-        status: MESSAGE.BOLETO_NO_GANADOR,
-        monto_ganador: monto,
-      };
-    }
 
-    if (data.pago) {
+    const monto = this.sumarMontoGanador(data.jugadas);
+
+    //!NO HAY MONTON GANADOR
+    if (monto === 0)
       return {
-        status: data.pago.canjeado_por
-          ? MESSAGE.BOLETO_CANJEADO
-          : MESSAGE.BOLETO_PAGADO,
-        monto_ganador: monto,
+        code: 101,
+        error: false,
+        status: {
+          message: MESSAGE.BOLETO_NO_GANADOR,
+          monto_ganador: 0,
+        },
+      };
+
+    //!Esta pago
+    if (data.pago) {
+      //!Esta Canjeado
+      if (data.pago.canjeado_por)
+        return {
+          code: 105,
+          error: false,
+          status: {
+            message: MESSAGE.BOLETO_CANJEADO,
+            monto_ganador: monto,
+          },
+        };
+
+      return {
+        code: 107,
+        error: false,
+        status: {
+          message: MESSAGE.BOLETO_PAGADO,
+          monto_ganador: monto,
+        },
       };
     }
 
     const fecha_sorteo = data.created_at.substring(0, 10);
     const dia_caduca = data.caduca;
     const validar_vencimiento = this.saberCaducado(fecha_sorteo, dia_caduca);
+
+    //! Esta vencido
+    if (validar_vencimiento)
+      return {
+        code: 103,
+        error: false,
+        status: {
+          message: MESSAGE.BOLETO_CADUCADO,
+          monto_ganador: monto,
+        },
+      };
+
+    //! Solo Ganador
     return {
-      status: validar_vencimiento
-        ? MESSAGE.BOLETO_CADUCADO
-        : MESSAGE.BOLETO_GANADOR,
-      monto_ganador: monto,
+      code: 100,
+      error: false,
+      status: {
+        message: MESSAGE.BOLETO_GANADOR,
+        monto_ganador: monto,
+      },
     };
   }
 

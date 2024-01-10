@@ -6,10 +6,13 @@ export class QueryBoletoDto {
   readonly id_boleto: string;
 }
 
+export class Respuesta {
+  readonly code: number;
+  readonly status: BoletoInfo;
+  readonly error: boolean;
+}
+
 export class BoletoInfo {
-  readonly status: string;
-
   readonly monto_ganador: number;
-
-  //readonly serial: number;
+  readonly message: string;
 }
