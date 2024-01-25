@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { validationENV, config } from 'src/config/config';
 import { LotenetModule } from 'src/components/components';
+import { TelegramModule } from 'src/components/telegram/telegram.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { LotenetModule } from 'src/components/components';
       validationSchema: validationENV(),
     }),
     LotenetModule,
+    TelegramModule,
   ],
   controllers: [AppController],
   providers: [AppService],
