@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import * as https from 'https';
 import { addDays } from 'date-fns';
 import axios from 'axios';
