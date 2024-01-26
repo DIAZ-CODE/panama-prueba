@@ -57,7 +57,10 @@ export class LotenetService {
 
   private validarData(data: any): Respuesta {
     //!NO HAY PREMIO EN EL SORTEO
-    if (data.sorteo.premios == null)
+    if (
+      data.sorteo.premios === null ||
+      (Array.isArray(data.sorteo.premios) && data.sorteo.premios.length === 0)
+    )
       return {
         code: 102,
         error: false,
