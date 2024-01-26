@@ -12,7 +12,7 @@ WORKDIR /app
 COPY . .
 
 # Comandos básicos
-RUN npm install
+RUN npm install --force
 RUN npm run build
 
 # Ejecuta el comando npm run pg:run-mg
