@@ -5,6 +5,7 @@ import { config } from 'src/config/config';
 import { Context, Telegraf } from 'telegraf';
 //import { message } from 'telegraf/filters';
 import { LotenetService } from '../lotenet/lotenet.service';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class TelegramService {
@@ -14,6 +15,7 @@ export class TelegramService {
   constructor(
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
     private readonly lotenetService: LotenetService,
+    private readonly messageService: MessageService,
   ) {
     this.bot = new Telegraf(this.configService.TOKEN_TELEGRAM);
     this.bot.launch();
@@ -33,14 +35,17 @@ export class TelegramService {
     this.bot.start(async (ctx) => {
       const name = String(ctx.from.first_name);
       ctx.reply(
-        `Hola ${name}, si deseas contultar un boletos manda /consultarBoleto`,
+        `Hola ${name}, ¡Bienvenido! 🌟 Soy tu asistente de boletos. Para consultar el estado de tu boleto, simplemente presiona /consultarBoleto. Estoy aquí para ayudarte. 😊
+        `,
       );
     });
   }
 
   async consultarBoletoComando() {
     this.bot.command('consultarBoleto', async (ctx) => {
-      await ctx.reply('Cual serial deseas consultar?');
+      await ctx.reply(
+        '¡Genial! Para continuar, por favor, proporciona el serial del boleto ganador. 🎫',
+      );
       this.setUserState(ctx.from.id, 'consultarBoleto');
     });
   }
@@ -60,7 +65,8 @@ export class TelegramService {
     const respuesta = await this.lotenetService.consultarBoleto({
       id_boleto: serial,
     });
-    return respuesta.status.message;
+    const message = await this.messageService.codeByMessage(respuesta.code);
+    return message;
   }
 
   async init() {
