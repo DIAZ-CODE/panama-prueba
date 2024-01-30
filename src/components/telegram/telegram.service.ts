@@ -3,7 +3,7 @@ import { ConfigType } from '@nestjs/config';
 import { Update } from '@telegraf/types';
 import { config } from 'src/config/config';
 import { Context, Telegraf } from 'telegraf';
-//import { message } from 'telegraf/filters';
+import { message } from 'telegraf/filters';
 import { LotenetService } from '../lotenet/lotenet.service';
 import { MessageService } from './message.service';
 
@@ -35,27 +35,32 @@ export class TelegramService {
     this.bot.start(async (ctx) => {
       const name = String(ctx.from.first_name);
       ctx.reply(
-        `Hola ${name}, ¡Bienvenido! 🌟 Soy tu asistente de boletos. Para consultar el estado de tu boleto, simplemente presiona /consultarBoleto. Estoy aquí para ayudarte. 😊
+        `Hola ${name}, ¡Bienvenido! 🌟 Soy tu asistente de boletos. Para consultar el estado de tu boleto, simplemente presiona /consultar Estoy aquí para ayudarte. 😊
         `,
       );
     });
   }
 
   async consultarBoletoComando() {
-    this.bot.command('consultarBoleto', async (ctx) => {
+    this.bot.command('consultar', async (ctx) => {
       await ctx.reply(
-        '¡Genial! Para continuar, por favor, proporciona el serial del boleto ganador. 🎫',
+        '¡Genial! Para continuar, por favor, proporciona el serial del boleto. 🎫',
       );
       this.setUserState(ctx.from.id, 'consultarBoleto');
     });
   }
 
   async consultarBoletoTexto() {
-    this.bot.on('text', async (ctx) => {
+    this.bot.on(message('text'), async (ctx) => {
       const userState = this.getUserState(ctx.from.id);
       if (userState === 'consultarBoleto') {
         const respuesta = await this.consultarLotenet(ctx.message.text);
         await ctx.reply(respuesta);
+        this.setUserState(ctx.from.id, undefined);
+      } else {
+        await ctx.reply(
+          '¡Hola! 🌟 Gracias por contactarnos. Para consultar el estado de tu boleto, simplemente presiona /consultar ¡Te deseamos mucha suerte en el juego y esperamos que sigas participando para vivir más emociones! 🎉',
+        );
         this.setUserState(ctx.from.id, undefined);
       }
     });

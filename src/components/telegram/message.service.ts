@@ -12,7 +12,7 @@ export class MessageService {
       return await this.messageByArr(this.messBoletoPagado);
     }
 
-    return '¡Lo sentimos, ha ocurrido un error inesperado en la consulta. 😕 Por favor, inténtalo nuevamente presionando /consultarBoleto. Si el problema persiste, puedes intentarlo más tarde. ¡Gracias por tu comprensión!';
+    return '¡Lo sentimos, ha ocurrido un error inesperado en la consulta. 😕 Por favor, inténtalo nuevamente presionando /consultar. Si el problema persiste, puedes intentarlo más tarde. ¡Gracias por tu comprensión!';
   }
 
   async messageByArr(messagesArr: string[]) {
@@ -26,12 +26,12 @@ export class MessageService {
   private messBoletoGanador = [
     '¡Felicidades, afortunado! 🌟 ¡Has ganado! 🎉 Pero, ¿te imaginas cuánto más podrías ganar la próxima vez? ¡Sigue participando y duplica tu suerte!',
     '¡Increíble! 🍀 Ganaste en grande. 💰 ¿Te has preguntado qué otro premio te aguarda? ¡La suerte siempre sonríe a los jugadores constantes!',
-    '¡Ganador confirmado! 🌈 Pero aquí está el truco: cada boleto es una nueva oportunidad. 🎫 ¿Listo para más emociones y premios?',
-    '¡Bravo! 🎊 ¡Eres un afortunado ganador! 💸 Pero, ¿y si te dijera que este es solo el principio? ¡Hay más premios esperándote!',
+    '¡Ganador confirmado! 🌈 Pero aquí está el truco: cada boleto es una nueva oportunidad. 🎫',
+    '¡Bravo! 🎊 ¡Eres un afortunado ganador! 💸',
     '¡Increíble, has ganado! 🎁 Pero, ¿te imaginas lo que podría suceder en tu próximo intento? ¡Sigue jugando y descúbrelo!',
     '¡Ganaste! 🌟 Pero la verdadera pregunta es: ¿cuánto más puedes ganar? 🚀 ¡Sigue participando y descubre nuevas oportunidades!',
     '¡Enhorabuena! 🏆 ¡Ganaste el premio! 💰 ¿Te animas a ver qué más te depara el destino? ¡Sigue jugando y descúbrelo!',
-    '¡Increíble, eres un ganador! 🎉 Pero, ¿y si te digo que hay más premios por descubrir? ¡No te detengas aquí, la suerte te espera!',
+    '¡Increíble, eres un ganador! 🎉 ¡No te detengas aquí, la suerte te espera!',
     '¡Ganador confirmado! 🎈 Pero la verdadera magia está en lo que viene después. 🌟 ¡Sigue jugando y descubre nuevas emociones!',
     '¡Brillante! 💎 ¡Eres un ganador! 🌈 Pero, ¿te gustaría experimentar aún más emociones y premios? ¡La diversión acaba de comenzar!',
   ];
@@ -50,29 +50,29 @@ export class MessageService {
   ];
 
   private messBoletoActivo = [
-    '¡Tu boleto está en juego! 🌟 ¡Cuantos más participes, más oportunidades tienes de ganar! 🎉 ¡Sigue así y mantente atento a los resultados!',
-    '¡Estás en la carrera por la suerte! 🚀 Cada boleto es una nueva posibilidad de éxito. 🌈 ¡Sigue jugando y espera con entusiasmo los resultados!',
-    '¡Tu boleto está activo y la emoción está en el aire! 🎫 Cuantas más veces juegues, más cerca estarás de la victoria. 💪 ¡Buena suerte en tu camino!',
-    '¡Estás en camino hacia la victoria! 🏆 Cuantos más boletos tengas, más oportunidades se abren para ti. 🍀 ¡Sigue jugando y esperando con expectación!',
-    '¡Tu boleto está listo para sorprenderte! 🎭 No pierdas la oportunidad de aumentar tus posibilidades con cada participación. 🎰 ¡Buena suerte en el sorteo!',
-    '¡Estás a punto de descubrir tu destino! 🌌 Cuantas más veces juegues, más posibilidades tendrás de ver tu boleto ganador. 🌟 ¡Sigue jugando con emoción!',
-    '¡La suerte está de tu lado! 🍀 Pero recuerda, la perseverancia es clave. 🔑 ¡Mientras más juegas, más cerca estás de alcanzar el premio! 🏅',
-    '¡Tu boleto tiene el potencial de ser el ganador! 🌠 Cuantas más veces juegues, más emocionantes serán tus posibilidades. 🚀 ¡Sigue participando con entusiasmo!',
-    '¡Tu boleto está en juego y el suspense es emocionante! 🎭 Cuantas más oportunidades tengas, mayores serán tus posibilidades de ganar. 🌈 ¡Buena suerte!',
-    '¡Estás a solo un paso de la victoria! 🎉 Cada boleto es una nueva oportunidad de triunfar. 💫 ¡Sigue jugando y espera con optimismo los resultados!',
+    '¡Excelente elección! 🌟 Tu boleto está activo y en juego. Ahora solo queda esperar a que salgan los resultados. ¡Buena suerte en el sorteo!',
+    '¡Tu boleto está en camino hacia la victoria! 🚀 Está activo y listo para el sorteo. ¡Esperemos que la suerte esté de tu lado! 🍀',
+    '¡Tu boleto está a la espera de los resultados! 🌈 Ahora toca esperar con emoción. ¡Buena suerte y que tu boleto sea el ganador!',
+    '¡Enhorabuena! 🎫 Tu boleto está activo. Solo queda aguardar a los resultados con optimismo. ¡Que la suerte te acompañe en este sorteo!',
+    '¡Emoción en marcha! 🎉 Tu boleto está activo y en juego. ¡Espera pacientemente y que la fortuna te sonría en el sorteo!',
+    '¡Tu boleto está a la espera de los resultados! 🏆 La emoción está en el aire. Ahora toca esperar y desear que tu boleto sea el ganador. ¡Buena suerte!',
+    '¡Gran elección! 🌌 Tu boleto está esperando los resultados del sorteo. ¡Esperemos juntos el resultado y que tengas mucha suerte en esta ocasión!',
+    '¡Aventura activada! 🚀 Tu boleto está en espera de los resultados. ¡Mantente en vilo y que la suerte te acompañe en este emocionante sorteo!',
+    '¡Tu boleto está activo y listo para el sorteo! 🎊 Ahora, solo queda esperar con entusiasmo los resultados. ¡Mucha suerte y que tu boleto sea el ganador!',
+    '¡Prepárate para la emoción! 🎭 Tu boleto está activo. ¡Esperemos con ansias los resultados y que la suerte esté de tu lado en este sorteo!',
   ];
 
   private messBoletoNoExite = [
-    '¡Ups! Parece que el serial ingresado no es válido. 😅 No te preocupes, los errores suceden. Si deseas volver a intentarlo, simplemente utiliza /consultarBoleto.',
-    '¡Oh no! Parece que hubo un pequeño desliz en el serial. 😕 ¡No te preocupes! Puedes volver a intentarlo ingresando /consultarBoleto.',
-    '¡Error de serial! 🚫 No te desanimes. Si quieres volver a intentar, simplemente utiliza /consultarBoleto y corriges el serial.',
-    'Parece que ha habido un pequeño error con el serial ingresado. 😬 ¡No pasa nada! Puedes rectificarlo y probar nuevamente con /consultarBoleto.',
-    'Serial no válido. 😟 No te preocupes, es fácil corregirlo. ¡Solo ingresa /consultarBoleto y vuelve a intentarlo!',
-    'El serial ingresado no coincide con nuestros registros. 🤔 ¡No te preocupes! Si quieres hacer otra consulta, simplemente utiliza /consultarBoleto.',
-    'Parece que hubo un error con el serial proporcionado. 😓 ¡No pasa nada! Para intentar nuevamente, solo utiliza /consultarBoleto y verifica el serial.',
-    '¡Algo salió mal con el serial! 😩 Pero no te preocupes, puedes corregirlo fácilmente con /consultarBoleto y volver a intentarlo.',
-    'Serial no reconocido. 🧐 ¡No te preocupes! Si deseas volver a consultar, simplemente utiliza /consultarBoleto y realiza la corrección necesaria.',
-    'Parece que ha habido un pequeño malentendido con el serial. 😣 ¡Sin problemas! Puedes rectificar ingresando /consultarBoleto y volver a intentarlo.',
+    '¡Ups! Parece que el serial ingresado no es válido. 😅 No te preocupes, los errores suceden. Si deseas volver a intentarlo, simplemente utiliza /consultar.',
+    '¡Oh no! Parece que hubo un pequeño desliz en el serial. 😕 ¡No te preocupes! Puedes volver a intentarlo ingresando /consultar.',
+    '¡Error de serial! 🚫 No te desanimes. Si quieres volver a intentar, simplemente utiliza /consultar y corriges el serial.',
+    'Parece que ha habido un pequeño error con el serial ingresado. 😬 ¡No pasa nada! Puedes rectificarlo y probar nuevamente con /consultar.',
+    'Serial no válido. 😟 No te preocupes, es fácil corregirlo. ¡Solo ingresa /consultar y vuelve a intentarlo!',
+    'El serial ingresado no coincide con nuestros registros. 🤔 ¡No te preocupes! Si quieres hacer otra consulta, simplemente utiliza /consultar.',
+    'Parece que hubo un error con el serial proporcionado. 😓 ¡No pasa nada! Para intentar nuevamente, solo utiliza /consultar y verifica el serial.',
+    '¡Algo salió mal con el serial! 😩 Pero no te preocupes, puedes corregirlo fácilmente con /consultar y volver a intentarlo.',
+    'Serial no reconocido. 🧐 ¡No te preocupes! Si deseas volver a consultar, simplemente utiliza /consultar y realiza la corrección necesaria.',
+    'Parece que ha habido un pequeño malentendido con el serial. 😣 ¡Sin problemas! Puedes rectificar ingresando /consultar y volver a intentarlo.',
   ];
 
   private messBoletoCaducado = [
