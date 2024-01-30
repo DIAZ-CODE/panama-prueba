@@ -24,16 +24,16 @@ export class MessageService {
   }
 
   private messBoletoGanador = [
-    '¡Felicidades, afortunado! 🌟 ¡Has ganado! 🎉 Pero, ¿te imaginas cuánto más podrías ganar la próxima vez? ¡Sigue participando y duplica tu suerte!',
-    '¡Increíble! 🍀 Ganaste en grande. 💰 ¿Te has preguntado qué otro premio te aguarda? ¡La suerte siempre sonríe a los jugadores constantes!',
-    '¡Ganador confirmado! 🌈 Pero aquí está el truco: cada boleto es una nueva oportunidad. 🎫',
-    '¡Bravo! 🎊 ¡Eres un afortunado ganador! 💸',
-    '¡Increíble, has ganado! 🎁 Pero, ¿te imaginas lo que podría suceder en tu próximo intento? ¡Sigue jugando y descúbrelo!',
-    '¡Ganaste! 🌟 Pero la verdadera pregunta es: ¿cuánto más puedes ganar? 🚀 ¡Sigue participando y descubre nuevas oportunidades!',
-    '¡Enhorabuena! 🏆 ¡Ganaste el premio! 💰 ¿Te animas a ver qué más te depara el destino? ¡Sigue jugando y descúbrelo!',
-    '¡Increíble, eres un ganador! 🎉 ¡No te detengas aquí, la suerte te espera!',
-    '¡Ganador confirmado! 🎈 Pero la verdadera magia está en lo que viene después. 🌟 ¡Sigue jugando y descubre nuevas emociones!',
-    '¡Brillante! 💎 ¡Eres un ganador! 🌈 Pero, ¿te gustaría experimentar aún más emociones y premios? ¡La diversión acaba de comenzar!',
+    '¡Felicidades, afortunado! 🌟 ¡Has ganado! 🎉 Pero, ¿te imaginas cuánto más podrías ganar la próxima vez? ¡Sigue participando y duplica tu suerte!\n\nNo olvide mostrar su boleto ganador al momento de reclamar su premio.',
+    '¡Increíble! 🍀 Ganaste en grande. 💰 ¿Te has preguntado qué otro premio te aguarda? ¡La suerte siempre sonríe a los jugadores constantes! \n\nNo olvide mostrar su boleto ganador al momento de reclamar su premio.',
+    '¡Ganador confirmado! 🌈 Pero aquí está el truco: cada boleto es una nueva oportunidad. 🎫 \n\nNo olvide mostrar su boleto ganador al momento de reclamar su premio.',
+    '¡Bravo! 🎊 ¡Eres un afortunado ganador! 💸\n\nPara proceder al cobro, asegúrese de tener en su mano el boleto ganador.',
+    '¡Increíble, has ganado! 🎁 Pero, ¿te imaginas lo que podría suceder en tu próximo intento? ¡Sigue jugando y descúbrelo!\n\nPara proceder al cobro, asegúrese de tener en su mano el boleto ganador.',
+    '¡Ganaste! 🌟 Pero la verdadera pregunta es: ¿cuánto más puedes ganar? 🚀 ¡Sigue participando y descubre nuevas oportunidades!\n\nPara proceder al cobro, asegúrese de tener en su mano el boleto ganador.',
+    '¡Enhorabuena! 🏆 ¡Ganaste el premio! 💰 ¿Te animas a ver qué más te depara el destino? ¡Sigue jugando y descúbrelo!\n\nRecuerde llevar su ticket ganador al punto de cobro para validar su premio.',
+    '¡Increíble, eres un ganador! 🎉 ¡No te detengas aquí, la suerte te espera!\n\nRecuerde llevar su ticket ganador al punto de cobro para validar su premio.',
+    '¡Ganador confirmado! 🎈 Pero la verdadera magia está en lo que viene después. 🌟 ¡Sigue jugando y descubre nuevas emociones!\n\nNo olvide mostrar su boleto ganador al momento de reclamar su premio.',
+    '¡Brillante! 💎 ¡Eres un ganador! 🌈 Pero, ¿te gustaría experimentar aún más emociones y premios? ¡La diversión acaba de comenzar!\n\nNo olvide mostrar su boleto ganador al momento de reclamar su premio.',
   ];
 
   private messBoletoNoGandor = [
