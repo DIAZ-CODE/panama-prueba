@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { validationENV, config } from 'src/config/config';
-import { LotenetModule } from 'src/components/components';
-import { TelegramModule } from 'src/components/telegram/telegram.module';
+import { validationENV, config } from './../config/config';
+import {
+  LotenetModule,
+  TelegramModule,
+  //BotWhatModule,
+  UsersModule,
+} from './../components/components';
 
 @Module({
   imports: [
@@ -16,6 +21,8 @@ import { TelegramModule } from 'src/components/telegram/telegram.module';
     }),
     LotenetModule,
     TelegramModule,
+    UsersModule,
+    //BotWhatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

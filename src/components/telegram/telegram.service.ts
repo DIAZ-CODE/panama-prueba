@@ -5,7 +5,7 @@ import { config } from 'src/config/config';
 import { Context, Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { LotenetService } from '../lotenet/lotenet.service';
-import { MessageService } from './message.service';
+import { MessageService } from '../lotenet/message.service';
 
 @Injectable()
 export class TelegramService {
@@ -30,23 +30,23 @@ export class TelegramService {
     return this.userstate[userId];
   }
 
-  private mensaje_de_bienvenida = `
-  ¡Bienvenido! 🌟 Soy tu asistente de boletos. Para consultar el estado de tu boleto, simplemente presiona /consultar estoy aquí para ayudarte. 😊
-  \nEste servicio es sólo para su orientación y entretenimiento, de ninguna forma representa un compromiso de pago y/o garantía de cobro de premios.
-  \nEl contenido de este chat no es vinculante con los resultados oficiales del sorteo, usted debe presentar el ticket en las oficinas correspondientes, en buenas condiciones y antes de caducar, para que pueda ser procesado como ganador.
-  \nNo se pagarán premios :
-    - Sin presentar ticket
-    - Si el Ticket está deteriorado
-    - Si el Ticket ha caducado
-    - Si el ticket ha sido alterado de cualquier forma
-  `;
+  //private mensaje_de_bienvenida = `
+  //¡Bienvenido! 🌟 Soy tu asistente de boletos. Para consultar el estado de tu boleto, simplemente presiona /consultar estoy aquí para ayudarte. 😊
+  //\nEste servicio es sólo para su orientación y entretenimiento, de ninguna forma representa un compromiso de pago y/o garantía de cobro de premios.
+  //\nEl contenido de este chat no es vinculante con los resultados oficiales del sorteo, usted debe presentar el ticket en las oficinas correspondientes, en buenas condiciones y antes de caducar, para que pueda ser procesado como ganador.
+  //\nNo se pagarán premios :
+  //  - Sin presentar ticket
+  //  - Si el Ticket está deteriorado
+  //  - Si el Ticket ha caducado
+  //  - Si el ticket ha sido alterado de cualquier forma
+  //`;
 
   //Este es el comando de Start, que es para suscribir los users
   async cmd_start() {
     this.bot.start(async (ctx) => {
       //const name = String(ctx.from.first_name);
-      const message = this.mensaje_de_bienvenida;
-      ctx.reply(message);
+      //const message = this.mensaje_de_bienvenida;
+      //ctx.reply(message);
     });
   }
 
@@ -85,7 +85,7 @@ export class TelegramService {
 
   async init() {
     this.cmd_start();
-    this.consultarBoletoComando();
-    this.consultarBoletoTexto();
+    //this.consultarBoletoComando();
+    //this.consultarBoletoTexto();
   }
 }
