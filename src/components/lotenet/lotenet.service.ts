@@ -103,7 +103,7 @@ export class LotenetService {
             monto_ganador: monto,
           },
         };
-      const message = this.messageService.codeByMessage(707);
+      const message = this.messageService.codeByMessage(107);
       return {
         code: 107,
         error: false,
@@ -130,11 +130,12 @@ export class LotenetService {
       };
 
     //! Solo Ganador
+    const message = this.messageService.codeByMessage(100);
     return {
       code: 100,
       error: false,
       status: {
-        message: MESSAGE.BOLETO_GANADOR,
+        message: message,
         monto_ganador: monto,
       },
     };
