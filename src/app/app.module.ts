@@ -6,9 +6,9 @@ import { AppService } from './app.service';
 import { validationENV, config } from './../config/config';
 import {
   LotenetModule,
-  TelegramModule,
+  //TelegramModule,
   //BotWhatModule,
-  UsersModule,
+  //UsersModule,
 } from './../components/components';
 
 @Module({
@@ -20,8 +20,8 @@ import {
       validationSchema: validationENV(),
     }),
     LotenetModule,
-    TelegramModule,
-    UsersModule,
+    //TelegramModule,
+    //UsersModule,
     //BotWhatModule,
   ],
   controllers: [AppController],
