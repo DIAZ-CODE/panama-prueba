@@ -8,11 +8,13 @@ import { ConfigType } from '@nestjs/config';
 import { QueryBoletoDto, Respuesta } from './dto/create-lotenet.dto';
 import { MESSAGE } from 'src/config/message';
 import { config } from 'src/config/config';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class LotenetService {
   constructor(
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
+    private readonly messageService: MessageService,
   ) {}
 
   async consultarBoleto(data: QueryBoletoDto): Promise<Respuesta> {
@@ -35,11 +37,12 @@ export class LotenetService {
       return consultarStatus;
     } catch (e) {
       if (e.response && e.response.status === 422) {
+        const message = this.messageService.codeByMessage(106);
         return {
           code: 106,
           error: false,
           status: {
-            message: MESSAGE.BOLETO_NO_EXISTE,
+            message: message,
             monto_ganador: 0,
           },
         };
@@ -60,28 +63,33 @@ export class LotenetService {
     if (
       data.sorteo.premios === null ||
       (Array.isArray(data.sorteo.premios) && data.sorteo.premios.length === 0)
-    )
+    ) {
+      const message = this.messageService.codeByMessage(102);
+
       return {
         code: 102,
         error: false,
         status: {
-          message: MESSAGE.BOLETO_ACTIVO,
+          message: message,
           monto_ganador: 0,
         },
       };
+    }
 
     const monto = this.sumarMontoGanador(data.jugadas);
 
     //!NO HAY MONTON GANADOR
-    if (monto === 0)
+    if (monto === 0) {
+      const message = this.messageService.codeByMessage(101);
       return {
         code: 101,
         error: false,
         status: {
-          message: MESSAGE.BOLETO_NO_GANADOR,
+          message: message,
           monto_ganador: 0,
         },
       };
+    }
 
     //!Esta pago
     if (data.pago) {
@@ -95,12 +103,12 @@ export class LotenetService {
             monto_ganador: monto,
           },
         };
-
+      const message = this.messageService.codeByMessage(707);
       return {
         code: 107,
         error: false,
         status: {
-          message: MESSAGE.BOLETO_PAGADO,
+          message: message,
           monto_ganador: monto,
         },
       };

@@ -2,20 +2,20 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageService {
-  async codeByMessage(code: number): Promise<string> {
-    if (code === 100) return await this.messageByArr(this.messBoletoGanador);
-    if (code === 101) return await this.messageByArr(this.messBoletoNoGandor);
-    if (code === 102) return await this.messageByArr(this.messBoletoActivo);
-    if (code === 103) return await this.messageByArr(this.messBoletoCaducado);
-    if (code === 106) return await this.messageByArr(this.messBoletoNoExite);
+  codeByMessage(code: number): string {
+    if (code === 100) return this.messageByArr(this.messBoletoGanador);
+    if (code === 101) return this.messageByArr(this.messBoletoNoGandor);
+    if (code === 102) return this.messageByArr(this.messBoletoActivo);
+    if (code === 103) return this.messageByArr(this.messBoletoCaducado);
+    if (code === 106) return this.messageByArr(this.messBoletoNoExite);
     if (code === 107 || code === 105) {
-      return await this.messageByArr(this.messBoletoPagado);
+      return this.messageByArr(this.messBoletoPagado);
     }
 
     return '¡Lo sentimos, ha ocurrido un error inesperado en la consulta. 😕 Por favor, inténtalo nuevamente presionando /consultar. Si el problema persiste, puedes intentarlo más tarde. ¡Gracias por tu comprensión!';
   }
 
-  async messageByArr(messagesArr: string[]) {
+  messageByArr(messagesArr: string[]) {
     // Generar un índice aleatorio
     const randomIndex = Math.floor(Math.random() * messagesArr.length);
 
